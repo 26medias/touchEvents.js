@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<title>touchEvents.js</title>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.mobile.just-touch.js"></script>
+		<script type="text/javascript" src="touchEvents.js"></script>
+		<style type="text/css">
+			body {
+				background-color:	#E2E2E2;
+			}
+			.container {
+				border:		1px solid #000;
+				width:		500px;
+				height:		500px;
+				position:	relative;
+			}
+			.container .drag {
+				position:			absolute;
+				background-color:	#525252;
+				cursor:				move;
+				width:				80px;
+				height:				30px;
+				top:				100px;
+				left:				100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="drag"></div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+			var el 			= $('.drag');
+			var elWidth		= el.width();
+			var elHeight	= el.height();
+			
+			var startPoint = {x:0,y:0};
+			
+			var te = new touchEvent(el, function(data) {
+				if (data.type == 'mousedown') {
+					var pos = el.position();
+					startPoint = {x:pos.left,y:pos.top};
+				}
+				if (data.type == 'mousedrag') {
+					el.css({
+						left:	startPoint.x + data.distance.x,
+						top:	startPoint.y + data.distance.y
+					});
+				}
+			});
+			console.log("te",te);
+		</script>
+	</body>
+</html>
